@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser, updateUserProfile } from '../actions/userActions';
-import { useAlert } from 'react-alert';
 import { CLEAR_ERRORS, CLEAR_MESSAGE } from '../constants/userConstants';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +10,6 @@ const UpdateProfile = () => {
   const {loading:updateLoading,error:updateError,message} = useSelector(state=>state.updateUser)
   const navigate = useNavigate();
 
-  const alert = useAlert();
 
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
@@ -50,20 +48,17 @@ const UpdateProfile = () => {
   useEffect(()=>{
     console.log("user updated message",message)
     if(error){
-      alert.error (error);
       dispatch({type:CLEAR_ERRORS})
     }
     if(updateError){
-        alert.error(updateError);
         dispatch({type:CLEAR_ERRORS})
     }
     if(message){
         console.log('inside the if ',message)
-        alert.success(message);
         dispatch({type:CLEAR_MESSAGE})
     }
     console.log(user);
-  },[dispatch,error,alert,updateError,message]);
+  },[dispatch,error,updateError,message]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

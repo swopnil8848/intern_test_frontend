@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../actions/userActions';
-import { useAlert } from 'react-alert';
 
 const Login = () => {
 
@@ -13,7 +12,6 @@ const Login = () => {
 
   const dispatch = useDispatch()
 
-  const alert = useAlert();
   const {error} = useSelector((state)=>state.user);
 
   console.log(error)
@@ -42,10 +40,9 @@ const Login = () => {
   
   useEffect(()=>{
     if(error){
-        alert.error(error);
         dispatch({type:'clearErrors'});
     }
-  },[error,alert,dispatch])
+  },[error,dispatch])
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

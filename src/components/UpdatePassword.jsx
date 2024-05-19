@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAlert } from 'react-alert';
 import { updateUserPassword } from '../actions/userActions';
 import { CLEAR_ERRORS, CLEAR_MESSAGE } from '../constants/userConstants';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +11,6 @@ const UpdatePassword = () => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    const alert = useAlert();
 
     const { error, loading, message } = useSelector((state) => state.updateUser);
 
@@ -24,15 +22,13 @@ const UpdatePassword = () => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error);
             dispatch({ type: CLEAR_ERRORS });
         }
 
         if (message) {
-            alert.success(message);
             dispatch({ type: CLEAR_MESSAGE });
         }
-    }, [dispatch, error, alert, message]);
+    }, [dispatch, error, message]);
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
